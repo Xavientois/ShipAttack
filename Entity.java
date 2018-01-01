@@ -10,15 +10,36 @@ import java.io.*;
  */
 public abstract class Entity
 {
-    protected BufferedImage sprite;   //Image used to represent the entity    
+
+    /**
+     * Image used to represent the entity.
+     */
+    protected BufferedImage sprite;     
 
     //Instance variables
-    protected int x, y;   //Position of entity's top left corner on screen
-    protected int xspeed, yspeed; //Movement speed of entity on each axis
-    protected Ship type; //Type of ship or origin of laser
-    protected boolean isLaser;  //For collision checking
 
-    /**Constructor for all entities*/
+    /**
+     * Position of entity's top left corner on screen.
+     */
+    protected int x, y;
+
+    /**
+     * Movement speed of entity on each axis.
+     */
+    protected int xspeed, yspeed;
+
+    /**
+     * Type of ship or origin of laser
+     */
+    protected Ship type;
+
+    /**
+     * For collision checking
+     */
+    protected boolean isLaser;
+
+    /**Constructor for all entities.
+     * @param type Type of entity for initializing values*/
     public Entity(Ship type){
         //Read image file
         try{          
@@ -31,7 +52,8 @@ public abstract class Entity
         this.isLaser = false;
     }
 
-    /**For drawing sprite on screen*/
+    /**For drawing sprite on screen.
+     * @param g2 Graphics interface with which to draw sprites.*/
     public void draw(Graphics2D g2){
         //Draw sprite
         g2.drawImage(sprite, x, y, null);
@@ -42,7 +64,8 @@ public abstract class Entity
 
     }
 
-    /**Sets sprite of entity*/
+    /**Sets sprite of entity
+     * @param url Location of sprite PNG file.*/
     public void setSprite(String url){
         //Read image file
         try{
@@ -52,15 +75,12 @@ public abstract class Entity
         }
     }
     
-    /**Called when hit by player ship*/
-    public void hitPlayer(Player player){
-        
-    }
+    /**Called when hit by player ship
+     * @param player Player entity to hit.*/
+    public abstract void hitPlayer(Player player);
     
-    /**Called when hit by a laser from the player*/
-    public void hit(){
-        
-    }
+    /**Called when hit by a laser from the player.*/
+    public abstract void hit();
     
     /**Kills this entity*/
     public void kill(){

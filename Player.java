@@ -7,10 +7,14 @@ import java.io.*;
 import java.util.*;
 
 /**
- * Ship controlled by the player
+ * Ship controlled by the player.
+ * 
+ * @author Joshua Rampersad
  */
 public class Player extends Entity
 {
+
+    /** Frame delay between laser shots.*/
     public static int wait = 4;//Wait time between shots
     
     private int limit;  //Speed limit for the player
@@ -18,7 +22,8 @@ public class Player extends Entity
     private int grace;  //Counter for grace period after ship gets hit
     private int laserWait;  //Counter for delay between laser shots
 
-    /**Constructor for Player class*/
+    /**Constructor for Player class.
+     * @param type Type of ship (should be set to player)*/
     public Player(Ship type){
         //Initialize values
         super(type);
@@ -36,7 +41,8 @@ public class Player extends Entity
         limit = 15; //xspeed or yspeed may not surpass the limit
     }
     
-    /**Draws ship and lives*/
+    /**Draws ship and lives.
+     * @param g2 Graphics interface which draws on panel*/
      public void draw(Graphics2D g2){
         //Draw sprite
         super.draw(g2);
@@ -57,7 +63,7 @@ public class Player extends Entity
         }
     }
 
-    /**Updates game, collisions, movement, etc. before rendering*/
+    /**Updates game, collisions, movement, etc. before rendering.*/
     public void tick(){
         //Determine yspeed
         if(!(MainGame.up.isPressed() && MainGame.down.isPressed())){
@@ -140,7 +146,8 @@ public class Player extends Entity
         //System.out.println("checked");
     }
 
-    /**Checks for any collision with a dangerous entity*/
+    /**Checks for any collision with a dangerous entity
+     * @return Entity with which the ship collides, or null if no collision*/
     public Entity checkCollision(){
         Rectangle thisHitBox = new Rectangle(x, y, sprite.getWidth(), sprite.getHeight());  //Creates a hitbox for this entity to check against other entities
         Rectangle otherHitBox;  //Hitbox to check against
@@ -170,14 +177,21 @@ public class Player extends Entity
         }
     }
     
-    /**Ends game*/
+    /**Ends game when player is killed.*/
     public void kill(){
         MainGame.game.stop();
     }
 
-    /**Fires Laser*/
+    /**Fires Laser.
+     * @param xFire x position of laser shot
+     * @param yFire y position of laser shot
+     */
     public void fire(int xFire, int yFire){
         MainGame.entities.add(new Laser(this.type, xFire, yFire));  //Adds fired laser to entity list
         //System.out.println("fired");
+    }
+
+    @Override
+    public void hitPlayer(Player player) {
     }
 }

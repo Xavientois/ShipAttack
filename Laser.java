@@ -7,9 +7,17 @@ import java.awt.Rectangle;
  */
 public class Laser extends Entity
 {
+
+    /**
+     * Speed of lasers in pixels per frame
+     */
     public static final int laserSpeed = 25;
 
-    /**Constructor for Laser class*/
+    /**Constructor for Laser class.
+     * @param type Type of ship from enumeration.
+     * @param x x position
+     * @param y y position
+     */
     public Laser(Ship type, int x, int y){
         //Initialize values
         super(type);
@@ -53,13 +61,15 @@ public class Laser extends Entity
         }
     }
 
-    /**Called when hits player ship*/
+    /**Called when hits player ship.
+     * @param player Player instance on which to apply hit*/
     public void hitPlayer(Player player){
         player.hit();
         kill();
     }
 
-    /**Checks for any collision with a dangerous entity*/
+    /**Checks for any collision with a dangerous entity
+     * @return Entity with which this collided, or null if no collision.*/
     public Entity checkCollision(){
         Rectangle thisHitBox = new Rectangle(x, y, sprite.getWidth(), sprite.getHeight());  //Creates a hitbox for this entity to check against other entities
         Rectangle otherHitBox;  //Hitbox to check against
@@ -74,5 +84,9 @@ public class Laser extends Entity
             }
         }
         return null;
+    }
+
+    @Override
+    public void hit() {
     }
 }

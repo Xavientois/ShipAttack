@@ -15,10 +15,22 @@ public class Enemy extends Entity
     private int health; //Keeps track of how many hits player can recieve before losing
     private int shots;  //Counter for delay between laser shots
     private int points; //Points gained when killed
+
+    /**
+     * Where on screen to stop descending
+     */
     protected int stopY;  //Y position to stop at when spawned
+
+    /**
+     * Horizontal position around which to move back and forth.
+     */
     protected int stopX;    //X point to shake around
 
-    /**Constructor for Enemy class*/
+    /**Constructor for Enemy class
+     * @param type Type of ship
+     * @param x Where to spawn
+     * @param stopY Where to stop
+     */
     public Enemy(Ship type, int x, int stopY){
         //Initialize values
         super(type);
@@ -109,7 +121,10 @@ public class Enemy extends Entity
         hit();
     }
 
-    /**Fires Laser*/
+    /**Fires Laser
+     * @param xFire x position of laser
+     * @param yFire y position of laser
+     */
     public void fire(int xFire, int yFire){
         MainGame.entities.add(new Laser(this.type, xFire, yFire));  //Adds fired laser to entity list
     }

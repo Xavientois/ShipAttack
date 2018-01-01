@@ -16,7 +16,10 @@ public class Background
     private int speed;  //Rate at which the image scrolls pixels/frame
     private int x, y;   //Position on screen for drawing
 
-    /**Constructor for background class*/
+    /**Constructor for background class.
+     * @param url Location of background image.
+     * @param speed Scrolling speed of background
+     */
     public Background(String url, int speed){
         //Initialize variables
         this.speed = speed; //Initialize scrolling speed
@@ -31,7 +34,8 @@ public class Background
         this.y = 0 - image.getHeight()/2;  //Starts in mid scroll
     }
 
-    /**For drawing background on screen*/
+    /**For drawing background on screen
+     * @param g2 Graphics interface with which to draw image*/
     public void draw(Graphics2D g2){
         y += speed; //Shifts image origin down
 
@@ -45,13 +49,18 @@ public class Background
         }
     }
     
-    /**Getters and Setters*/
+    /**Setter for speed
+     * @param speed value to set*/
     //Speed setter
     public void setSpeed(int speed){
         this.speed = speed;
     }
     
-    //Image setter with url
+
+    /**
+     * Image setter with url
+     * @param url Location of image
+     */
     public void setImage(String url){
         try{
             this.image =  ImageIO.read(new File(url));  //Reads file to get image
